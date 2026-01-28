@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { validateAdForm } from "../utils/validate";
 import { createAd } from "../services/ads";
+import { validateMusicId } from "../services/music";
 import ErrorBanner from "./ErrorBanner";
 import { getErrorMessage } from "../utils/errorMessage";
+import MusicSelector from "./MusicSelector";
 
 function AdForm() {
   const [form, setForm] = useState({
@@ -10,6 +12,8 @@ function AdForm() {
     objective: "",
     adText: "",
     cta: "",
+    musicOption: "",
+    musicId: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -23,6 +27,7 @@ function AdForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Step 1: form validation
     const validationErrors = validateAdForm(form);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -35,6 +40,13 @@ function AdForm() {
 
     try {
       const token = localStorage.getItem("tiktok_token");
+
+      // Step 2: music validation (if applicable)
+      if (form.musicOption !== "none") {
+        await validateMusicId(form.musicId);
+      }
+
+      // Step 3: submit ad
       await createAd(token, form);
       alert("Ad created successfully ✅");
     } catch (err) {
@@ -49,7 +61,11 @@ function AdForm() {
       {globalError && <ErrorBanner message={globalError} />}
 
       <form onSubmit={handleSubmit}>
-        <table border="1" cellPadding="10" style={{ borderCollapse: "collapse", width: "100%" }}>
+        <table
+          border="1"
+          cellPadding="10"
+          style={{ borderCollapse: "collapse", width: "100%" }}
+        >
           <tbody>
             {/* Campaign Name */}
             <tr>
@@ -112,6 +128,18 @@ function AdForm() {
                 {errors.cta && (
                   <div style={{ color: "red" }}>{errors.cta}</div>
                 )}
+              </td>
+            </tr>
+
+            {/* Music Selector */}
+            <tr>
+              <td>Music</td>
+              <td>
+                <MusicSelector
+                  form={form}
+                  setForm={setForm}
+                  errors={errors}
+                />
               </td>
             </tr>
 
