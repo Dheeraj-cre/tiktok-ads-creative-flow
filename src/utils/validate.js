@@ -18,6 +18,19 @@ export function validateAdForm(form) {
   if (!form.cta) {
     errors.cta = "CTA is required";
   }
+  if (!form.musicOption) {
+  errors.musicOption = "Please select a music option";
+}
+
+if (form.musicOption === "existing" && !form.musicId) {
+  errors.musicId = "Music ID is required";
+}
+
+if (form.musicOption === "none" && form.objective === "conversions") {
+  errors.musicOption =
+    "No music is allowed only for Traffic campaigns";
+}
+
 
   return errors;
 }

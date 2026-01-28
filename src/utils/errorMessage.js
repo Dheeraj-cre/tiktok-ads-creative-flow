@@ -11,6 +11,10 @@ export function getErrorMessage(error) {
   if (error.code === "PERMISSION_DENIED") {
     return "TikTok Ads permission is missing.";
   }
+  if (error.code === "INVALID_MUSIC") {
+  return "Selected music is not valid. Please try another.";
+}
+
 
   // Generic fallback
   return "Something went wrong. Please try again.";

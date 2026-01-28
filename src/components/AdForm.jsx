@@ -49,53 +49,82 @@ function AdForm() {
       {globalError && <ErrorBanner message={globalError} />}
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Campaign Name</label><br />
-          <input
-            name="campaignName"
-            value={form.campaignName}
-            onChange={handleChange}
-          />
-          {errors.campaignName && <p>{errors.campaignName}</p>}
-        </div>
+        <table border="1" cellPadding="10" style={{ borderCollapse: "collapse", width: "100%" }}>
+          <tbody>
+            {/* Campaign Name */}
+            <tr>
+              <td>Campaign Name</td>
+              <td>
+                <input
+                  name="campaignName"
+                  value={form.campaignName}
+                  onChange={handleChange}
+                />
+                {errors.campaignName && (
+                  <div style={{ color: "red" }}>{errors.campaignName}</div>
+                )}
+              </td>
+            </tr>
 
-        <div>
-          <label>Objective</label><br />
-          <select
-            name="objective"
-            value={form.objective}
-            onChange={handleChange}
-          >
-            <option value="">Select</option>
-            <option value="traffic">Traffic</option>
-            <option value="conversions">Conversions</option>
-          </select>
-          {errors.objective && <p>{errors.objective}</p>}
-        </div>
+            {/* Objective */}
+            <tr>
+              <td>Objective</td>
+              <td>
+                <select
+                  name="objective"
+                  value={form.objective}
+                  onChange={handleChange}
+                >
+                  <option value="">Select</option>
+                  <option value="traffic">Traffic</option>
+                  <option value="conversions">Conversions</option>
+                </select>
+                {errors.objective && (
+                  <div style={{ color: "red" }}>{errors.objective}</div>
+                )}
+              </td>
+            </tr>
 
-        <div>
-          <label>Ad Text</label><br />
-          <textarea
-            name="adText"
-            value={form.adText}
-            onChange={handleChange}
-          />
-          {errors.adText && <p>{errors.adText}</p>}
-        </div>
+            {/* Ad Text */}
+            <tr>
+              <td>Ad Text</td>
+              <td>
+                <textarea
+                  name="adText"
+                  value={form.adText}
+                  onChange={handleChange}
+                />
+                {errors.adText && (
+                  <div style={{ color: "red" }}>{errors.adText}</div>
+                )}
+              </td>
+            </tr>
 
-        <div>
-          <label>CTA</label><br />
-          <input
-            name="cta"
-            value={form.cta}
-            onChange={handleChange}
-          />
-          {errors.cta && <p>{errors.cta}</p>}
-        </div>
+            {/* CTA */}
+            <tr>
+              <td>CTA</td>
+              <td>
+                <input
+                  name="cta"
+                  value={form.cta}
+                  onChange={handleChange}
+                />
+                {errors.cta && (
+                  <div style={{ color: "red" }}>{errors.cta}</div>
+                )}
+              </td>
+            </tr>
 
-        <button disabled={loading}>
-          {loading ? "Submitting..." : "Submit Ad"}
-        </button>
+            {/* Submit Button */}
+            <tr>
+              <td colSpan="2" align="center">
+                <button disabled={loading}>
+                  {loading ? "Submitting..." : "Submit Ad"}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </form>
     </div>
   );
