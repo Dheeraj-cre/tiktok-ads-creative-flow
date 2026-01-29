@@ -58,6 +58,5 @@ Backend OAuth
 Token refresh
 Real TikTok Ads API integration
 
-Author
-Dheeraj Srivastava
+
 
